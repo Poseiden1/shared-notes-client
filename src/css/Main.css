@@ -1,0 +1,14 @@
+.main {
+  margin-top: 50px;
+  margin-left: 251px;
+  margin-right: 251px;
+  width: 80%;
+  float: left;
+  position: absolute;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding: 50px;
+  background-color: #0e0e0e;
+  transition: visibility 0.1s linear, opacity 0.1s linear;
+}

@@ -1,0 +1,47 @@
+.header {
+  background-color: #be1e3c;
+  box-shadow: 0 1.5px 3px rgba(0, 0, 0, 0.24), 0 3px 8px rgba(0, 0, 0, 0.05);
+  border: none;
+  border-radius: 0px;
+  margin-bottom: 0px;
+  height: 50px;
+  width: 100%;
+  z-index: 3;
+  position: fixed;
+}
+.header-title {
+  color: #fff;
+  font-size: 18px;
+  padding: 15px 5px 0px 15px;
+  height: 30px;
+  width: 300px;
+  margin-left: 30px;
+  position: absolute;
+  
+}
+.header-download {
+  color: #fff;
+  background-color: #be1e3c;
+  font-size: 18px;
+  padding: 15px 5px 0px 15px;
+  height: 35px;
+  width: 145px;
+  margin-left: 300px;
+  visibility: visible;
+}
+.header-download:hover {
+  background-color: #9e1b33;
+  cursor: pointer;
+}
+.header-list {
+  width: 20px;
+  height: 20px;
+  padding: 5px;
+  margin: 10px;
+  float: left;
+  background-color: #be1e3c;
+  color: #fff;
+}
+.header-list:hover {
+  cursor: pointer;
+}
