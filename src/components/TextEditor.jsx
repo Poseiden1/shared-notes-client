@@ -32,6 +32,11 @@ export default function TextEditor(props) {
     const handler = (delta, name, id) => {
       if (id === props.id) {
         quill.updateContents(delta)
+        if(id === props.socket.id) {
+          quill.focus()
+          quill.setSelection(quill.getLength()-1, 1)
+          quill.container.previousSibling.style.display = 'block'
+        }
       }
     }
     props.socket.on('receive-changes', handler)
@@ -59,7 +64,7 @@ export default function TextEditor(props) {
     if (props.socket == null || quill == null) return
     const handler = (range, oldRange, source) => {
       if (range) {
-        quill.container.previousSibling.style.display = 'block'
+        // quill.container.previousSibling.style.display = 'block'
         if (range.length === 0) {
           console.log('User cursor is on', range.index)
         } else {
@@ -67,7 +72,7 @@ export default function TextEditor(props) {
           console.log('User has highlighted', text)
         }
       } else {
-        quill.container.previousSibling.style.display = 'none'
+        // quill.container.previousSibling.style.display = 'none'
         console.log('Cursor not in the editor')
       }
     }
@@ -81,13 +86,19 @@ export default function TextEditor(props) {
     if (props.socket == null || quill == null) return
 
     const handler = (data, id) => {
-      if (id === props.id) quill.setContents(data)
+      if (id === props.id) {
+        quill.setContents(data)
+        if(id === props.socket.id) {
+          quill.enable()
+          quill.focus()
+          quill.setSelection(quill.getLength()-1, 1)
+          quill.container.previousSibling.style.display = 'block'
+        }
+      }
     }
 
     props.socket.on('load-document-field', handler)
-
   }, [props, quill])
-
 
   useEffect(() => {
     if (props.socket == null || quill == null) return
@@ -113,11 +124,12 @@ export default function TextEditor(props) {
     })
     q.container.previousSibling.style.display = 'none'
     setQuill(q)
-    q.enable()
+    q.disable()
     q.setText('')
+    q.root.setAttribute('spellcheck', false)
     if (props.id === 'title') {
-      q.focus()
-      q.container.previousSibling.style.display = 'block'
+      // q.focus()
+      // q.container.previousSibling.style.display = 'block'
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
   return <div id={props.id} ref={wrapperRef}></div>

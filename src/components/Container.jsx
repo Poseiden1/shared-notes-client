@@ -27,6 +27,9 @@ const Container = (props) => {
           <Route exact path='/home'>
             <Home></Home>
           </Route>
+          <Route path='/rooms/:id'>
+            <Document nickname={nickname}></Document>
+          </Route>
           <Route exact path='/rooms'>
             <Rooms nickname={nickname} setNickname={setNickname} roomId = {roomId} setRoomId = {setRoomId}></Rooms>
           </Route>
@@ -35,9 +38,6 @@ const Container = (props) => {
           </Route>
           <Route exact path='/help'>
             <Help></Help>
-          </Route>
-          <Route path='/rooms/:id'>
-            <Document nickname={nickname}></Document>
           </Route>
           <Redirect exact from='/' to='home' />
           <Redirect from='/' to='404' />

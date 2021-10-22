@@ -29,6 +29,9 @@
     margin: 0;
     padding: 0;
   }
+  #title {
+    border-top: 2px solid #ccc;
+  }
   .ql-editor {
     box-sizing: border-box;
     line-height: 1.42;

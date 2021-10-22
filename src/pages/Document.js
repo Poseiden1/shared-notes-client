@@ -27,7 +27,6 @@ const Document = (props) => {
 
     socket.once('selfJoinedRoom', () => {
       quills.forEach((q) => {
-        console.log(q)
         socket.emit('get-document-field', q.id)
       })
     })
@@ -38,10 +37,10 @@ const Document = (props) => {
 
   useEffect(() => {
     if (socket === null || socket === undefined) return
-    socket.on('joinedRoom', (sIds) => {
+    socket.on('joinedRoom', (users) => {
       var newArray = [{ id: 'title' }]
-      sIds.forEach((sId) => {
-        newArray.push({ id: sId })
+      users.forEach((user) => {
+        newArray.push({ id: user.id, nickname: user.nickname })
       })
       console.log("Test")
       setQuills(newArray)

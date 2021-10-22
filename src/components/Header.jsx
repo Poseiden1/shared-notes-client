@@ -6,8 +6,11 @@ const Header = () => {
   function printDiv() {
     var w = window.open()
     var printContents = document.getElementById('document').innerHTML
-    w.document.write('<style>.ql-tooltip.ql-hidden { display: none; } .ql-clipboard { display: none; } </style>')
-    w.document.write(printContents)
+    var doc = document.getElementById('document').children
+    for(var i = 0; i < doc.length; i++) {
+      w.document.write(doc[i].lastChild.innerHTML)
+    }
+    w.document.write('<style>.ql-tooltip.ql-hidden { display: none; } .ql-clipboard { display: none; } .ql-toolbar.ql-snow { display: none; }</style>')
     setTimeout(() => {
       w.print()
       w.close()

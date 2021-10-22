@@ -1,241 +1,241 @@
 * {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
 }
 .roomlist {
-    width: 650px;
-    height: 500px;
-    background-color: #1d1d1d;
-    border-radius: 20px;
-    color: #fff;
+  width: 650px;
+  height: 500px;
+  background-color: #fff;
+  border-radius: 20px;
+  color: #000;
 }
 .roomlist-title {
-    color: #fff;
-    font-size: 20px;
-    padding: 20px;
-    width: 140px;
-    height: 80px;
-    float: left;
-    box-sizing: border-box;
+  color: #000;
+  font-size: 20px;
+  padding: 20px;
+  width: 140px;
+  height: 80px;
+  float: left;
+  box-sizing: border-box;
 }
 .roomlist-counter {
-    color: #fff;
-    font-size: 12px;
-    padding: 20px;
-    height: 80px;
-    width: 140px;
-    float: right;
-    box-sizing: border-box;
+  color: #000;
+  font-size: 12px;
+  padding: 20px;
+  height: 80px;
+  width: 140px;
+  float: right;
+  box-sizing: border-box;
 }
 .roomlist-line {
-    border-bottom: 3px solid #be1e3c;
-    width: 610px;
-    height: 1px;
-    margin: 60px 20px 10px 20px;
-    position: absolute;
-    box-sizing: border-box;
+  border-bottom: 3px solid #be1e3c;
+  width: 610px;
+  height: 1px;
+  margin: 60px 20px 10px 20px;
+  position: absolute;
+  box-sizing: border-box;
 }
 
 .roomlist-table {
-    width: 500px;
-    margin: 0px 0px 0px 15px;
-    border-collapse: collapse;
-    font-size: 14px;
-    font-family: 'Courier New', Courier, monospace;
-    position: absolute;
-    margin: 60px 0px 0px 20px;
+  width: 500px;
+  margin: 0px 0px 0px 15px;
+  border-collapse: collapse;
+  font-size: 14px;
+  font-family: 'Courier New', Courier, monospace;
+  position: absolute;
+  margin: 60px 0px 0px 20px;
 }
 .roomlist-table tr {
-    text-align: left;
-    height: 35px;
-    width: 500px;
+  text-align: left;
+  height: 35px;
+  width: 500px;
 }
 
 .roomlist-table thead {
-    display: block;
-    border-bottom: 2px solid #ccc;
+  display: block;
+  border-bottom: 2px solid #ccc;
 }
 
 .roomlist-table tbody {
-    display: block;
-    height: 350px;       /* Just for the demo          */
-    overflow-y: auto;    /* Trigger vertical scroll    */
-    overflow-x: hidden;  /* Hide the horizontal scroll */
+  display: block;
+  height: 350px; /* Just for the demo          */
+  overflow-y: auto; /* Trigger vertical scroll    */
+  overflow-x: hidden; /* Hide the horizontal scroll */
 }
 .roomlist-table tbody tr:hover {
-    background-color: #2f2f2f;
-    cursor: pointer;
+  background-color: #e0e0e0;
+  cursor: pointer;
 }
 
-.roomlist th, .roomlist td {
-    padding-left: 3px;
-    width: 120px;
+.roomlist th,
+.roomlist td {
+  padding-left: 3px;
+  width: 120px;
 }
 
 .roomlist-button {
-    background-color: #be1e3c;
-    width: 100px;
-    height: 30px;
+  background-color: #be1e3c;
+  width: 100px;
+  height: 30px;
 
-    box-sizing: border-box;
-    border-radius: 4px;
-    position: absolute;
-    display: block;
+  box-sizing: border-box;
+  border-radius: 4px;
+  position: absolute;
+  display: block;
 }
 .roomlist-button-icon {
-    position: absolute;
-    height: 16px;
-    padding: 7px;
+  position: absolute;
+  height: 16px;
+  padding: 7px;
 }
 .roomlist-button-text {
-    font-size: 14px;
-    font-weight: bold;
-    position: absolute;
-    height: 20px;
-    color: #fff;
-    padding: 5px;
-    margin-left: 30px;
+  font-size: 14px;
+  font-weight: bold;
+  position: absolute;
+  height: 20px;
+  color: #fff;
+  padding: 5px;
+  margin-left: 30px;
 }
 .roomlist-button:hover {
-    cursor: pointer;
-    background-color: #a01932;
+  cursor: pointer;
+  background-color: #a01932;
 }
 
 #roomlist-refresh {
-    margin: 100px 0px 0px 530px;
+  margin: 100px 0px 0px 530px;
 }
 
 #roomlist-create {
-    margin: 140px 0px 0px 530px;
+  margin: 140px 0px 0px 530px;
 }
 
 #roomlist-join {
-    margin: 180px 0px 0px 530px;
+  margin: 180px 0px 0px 530px;
 }
 
 #loadSpinner {
-    position: absolute;
-    margin: 120px 0px 0px 225px;
+  position: absolute;
+  margin: 120px 0px 0px 225px;
 }
 
 .room-create {
-    width: 360px;
-    height: 280px;
-    background-color: #1d1d1d;
-    border-radius: 20px;
+  width: 360px;
+  height: 280px;
+  background-color: #fff;
+  border-radius: 20px;
 }
 #room-join {
-    width: 360px;
-    height: 195px;
-    background-color: #1d1d1d;
-    border-radius: 20px;
+  width: 360px;
+  height: 195px;
+  background-color: #fff;
+  border-radius: 20px;
 }
 .room-create-title {
-    color: #fff;
-    font-size: 20px;
-    padding: 20px;
-    width: 360px;
-    height: 80px;
-    float: left;
-    box-sizing: border-box;
+  color: #000;
+  font-size: 20px;
+  padding: 20px;
+  width: 360px;
+  height: 80px;
+  float: left;
+  box-sizing: border-box;
 }
 
 .room-create-line {
-    border-bottom: 3px solid #be1e3c;
-    width: 320px;
-    height: 1px;
-    margin: 50px 0px 0px 20px;
-    position: absolute;
-    box-sizing: border-box;
+  border-bottom: 3px solid #be1e3c;
+  width: 320px;
+  height: 1px;
+  margin: 50px 0px 0px 20px;
+  position: absolute;
+  box-sizing: border-box;
 }
 .room-create-field {
-    background-color: #be1e3c;
-    width: 320px;
-    height: 30px;
-    box-sizing: border-box;
-    border-radius: 4px;
-    position: absolute;
-    display: block;
+  background-color: #be1e3c;
+  width: 320px;
+  height: 30px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  position: absolute;
+  display: block;
 }
 
 .room-create-field-text {
-    color: #fff;
-    position: absolute;
-    color: #fff;
-    font-size: 14px;
-    margin: 3px 0px 3px 10px;
+  color: #fff;
+  position: absolute;
+  font-size: 14px;
+  margin: 3px 0px 3px 10px;
 }
 
 .room-create-field-input {
-    color: #fff;
-    background-color: #0e0e0e;
-    width: 145px;
-    height: 22px;
-    margin: 3px 0px 3px 160px;
-    border-radius: 5px;
-    padding-left: 10px;
-    border: 0;
-    outline: 0;
+  color: #000;
+  background-color: #f2f2f2;
+  width: 145px;
+  height: 22px;
+  margin: 3px 0px 3px 160px;
+  border-radius: 5px;
+  padding-left: 10px;
+  border: 0;
+  outline: 0;
 }
 
 #room-create-field-nickname {
-    margin: 70px 20px 5px 20px;
+  margin: 70px 20px 5px 20px;
 }
 
 #room-create-field-name {
-    margin: 110px 20px 5px 20px;
+  margin: 110px 20px 5px 20px;
 }
 
 #room-create-field-users {
-    margin: 150px 20px 5px 20px;
+  margin: 150px 20px 5px 20px;
 }
 #room-create-field-password {
-    margin: 190px 20px 5px 20px;
+  margin: 190px 20px 5px 20px;
 }
 #room-join-field-password {
-    margin: 110px 20px 5px 20px;
+  margin: 110px 20px 5px 20px;
 }
 
 .room-create-button {
-    background-color: #be1e3c;
-    width: 150px;
-    height: 30px;
-    box-sizing: border-box;
-    border-radius: 4px;
-    position: absolute;
-    display: block;
+  background-color: #be1e3c;
+  width: 150px;
+  height: 30px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  position: absolute;
+  display: block;
 }
 .room-create-button-icon {
-    position: absolute;
-    height: 16px;
-    padding: 7px;
-    margin-left: 20px;
+  position: absolute;
+  height: 16px;
+  padding: 7px;
+  margin-left: 20px;
 }
 .room-create-button-text {
-    font-size: 14px;
-    font-weight: bold;
-    position: absolute;
-    color: #fff;
-    height: 20px;
-    padding: 5px;
-    margin-left: 50px;
+  font-size: 14px;
+  font-weight: bold;
+  position: absolute;
+  color: #fff;
+  height: 20px;
+  padding: 5px;
+  margin-left: 50px;
 }
 
 #room-create-button-cancel {
-    margin: 230px 0px 0px 20px;
+  margin: 230px 0px 0px 20px;
 }
 #room-create-button-play {
-    margin: 230px 0px 0px 190px;
+  margin: 230px 0px 0px 190px;
 }
 
 #room-join-button-cancel {
-    margin: 150px 0px 0px 20px;
+  margin: 150px 0px 0px 20px;
 }
 #room-join-button-play {
-    margin: 150px 0px 0px 190px;
+  margin: 150px 0px 0px 190px;
 }
 .room-create-button:hover {
-    background-color: #a01932;
-    cursor: pointer;
+  background-color: #a01932;
+  cursor: pointer;
 }

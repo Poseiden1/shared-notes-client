@@ -5,8 +5,8 @@
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none;
-  background-color: #1d1d1d;
-  border-right: 1px solid rgb(65, 65, 65);
+  background-color: #fff;
+  border-right: 1px solid #ccc;
   width: 250px;
   height: 100%;
   z-index: 1;
@@ -19,21 +19,22 @@
   padding: 10px;
   width: 230px;
   list-style: none;
+  
 }
 #navbar ul li {
-  color: #ffffff;
+  color: #000;
   padding: 4px 4px 4px 14px;
   font-size: 14px;
   list-style: none;
   transition: background-color 0.15s linear;
 }
 #navbar ul li:hover {
-  background-color: #2f2f2f;
+  background-color: #e0e0e0;
   cursor: pointer;
 }
 #navbar ul .navbar-dropdown .open,
 #navbar ul .navbar-dropdown .close {
-  color: rgb(255, 255, 255);
+  color: #000;
 }
 #navbar ul .navbar-dropdown .open::before {
   font-size: 8px;

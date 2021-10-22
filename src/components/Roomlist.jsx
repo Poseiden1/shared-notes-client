@@ -47,18 +47,25 @@ const Roomlist = (props) => {
         id={el.id}
         key={el.id}
         onClick={(e) => onClickRow(e)}
-        style={{ backgroundColor: activeRow === el.id ? '#777' : '' }}
+        style={{ backgroundColor: activeRow === el.id ? '#CCC' : '' }}
       >
         <td>{el.name}</td>
-        <td>{el.users}</td>
+        <td>{el.users} / {el.maxusers}</td>
         <td>{el.password}</td>
         <td>{el.owner}</td>
       </tr>
     )
   }
+  const getUserCount = () => {
+    var count = 0
+    tableContent.map((el) => {
+      count += el.users
+    })
+    return count
+  }
   const onRefresh = () => {
     setLoading(true)
-    fetch('rooms/').then((result) =>
+    fetch('/rooms/').then((result) =>
       result.json().then((data) => {
         setTimeout(() => {
           setTableContent(data)
@@ -111,7 +118,7 @@ const Roomlist = (props) => {
   const onJoinRoom = () => {
     let data = {
       password: password,
-      roomId: activeRow
+      roomId: activeRow,
     }
     fetch('/rooms/join', {
       method: 'POST',
@@ -121,8 +128,7 @@ const Roomlist = (props) => {
       body: JSON.stringify(data),
     }).then((result) => {
       result.json().then((data) => {
-        if(data.success)
-        history.push(data.redirectUrl)
+        if (data.success) history.push(data.redirectUrl)
       })
     })
   }
@@ -170,7 +176,10 @@ const Roomlist = (props) => {
               <th>Owner</th>
             </tr>
           </thead>
-          <tbody ref={roomlistTBody}>{tableContent.map(renderRow)}</tbody>
+          <tbody ref={roomlistTBody}>
+            {tableContent.map(renderRow)}
+            <tr><td colSpan={4} style={{textAlign: 'center', color:'#777', width: 500}}>{getUserCount()} user(s) found in {tableContent.length} room(s)</td></tr>
+          </tbody>
         </table>
         <div
           className='roomlist-button'
