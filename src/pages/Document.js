@@ -41,7 +41,6 @@ const Document = (props) => {
       users.forEach((user) => {
         newArray.push({ id: user.id, nickname: user.nickname })
       })
-      console.log('Test')
       setQuills(newArray)
     })
   }, [socket])

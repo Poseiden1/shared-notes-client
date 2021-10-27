@@ -12,7 +12,7 @@ var toolbarOptions = [
   [{ script: 'sub' }, { script: 'super' }], // superscript/subscript
   [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
   [{ header: [1, 2, 3, false] }], // Header
-  // ['image'], // Image
+  ['image'], // Image
   [{ color: [] }, { background: [] }], // dropdown with defaults from theme
   ['clean'], // remove formatting button
 ]
@@ -36,13 +36,14 @@ export default function TextEditor(props) {
           quill.focus()
           quill.setSelection(quill.getLength()-1, 1)
           quill.container.previousSibling.style.display = 'block'
+        
         }
       }
     }
-    props.socket.on('receive-changes', handler)
+    props.socket.on('receive-changes-' + props.id, handler)
 
     return () => {
-      props.socket.off('receive-changes', handler)
+      props.socket.off('receive-changes' + props.id, handler)
     }
   }, [props, quill])
 
@@ -97,7 +98,11 @@ export default function TextEditor(props) {
       }
     }
 
-    props.socket.on('load-document-field', handler)
+    props.socket.on('load-document-field-' + props.id, handler)
+    return () => {
+      props.socket.off('load-document-field-' + props.id, handler)
+    }
+
   }, [props, quill])
 
   useEffect(() => {
@@ -110,7 +115,11 @@ export default function TextEditor(props) {
       }
     }
 
-    props.socket.on('get-document-field', handler)
+    props.socket.on('get-document-field-' + props.id, handler)
+
+    return () => {
+      props.socket.off('get-document-field-' + props.id, handler)
+    }
   }, [props.socket, quill]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const wrapperRef = useCallback((wrapper) => {
