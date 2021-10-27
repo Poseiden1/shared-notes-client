@@ -12,7 +12,7 @@ var toolbarOptions = [
   [{ script: 'sub' }, { script: 'super' }], // superscript/subscript
   [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
   [{ header: [1, 2, 3, false] }], // Header
-  ['image'], // Image
+  // ['image'], // Image
   [{ color: [] }, { background: [] }], // dropdown with defaults from theme
   ['clean'], // remove formatting button
 ]

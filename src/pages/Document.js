@@ -3,12 +3,11 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useHistory } from 'react-router'
 import TextEditor from '../components/TextEditor'
-import { io, Socket } from 'socket.io-client' 
-
+import { io, Socket } from 'socket.io-client'
 
 const Document = (props) => {
   const history = useHistory()
-  /**@type {[Socket]} */ 
+  /**@type {[Socket]} */
   const [socket, setSocket] = useState()
   const [quills, setQuills] = useState([])
   const document = useRef()
@@ -33,7 +32,7 @@ const Document = (props) => {
     socket.once('room-not-found', () => {
       history.push('/rooms')
     })
-  }, [socket,quills])
+  }, [socket, quills])
 
   useEffect(() => {
     if (socket === null || socket === undefined) return
@@ -42,10 +41,10 @@ const Document = (props) => {
       users.forEach((user) => {
         newArray.push({ id: user.id, nickname: user.nickname })
       })
-      console.log("Test")
+      console.log('Test')
       setQuills(newArray)
     })
-  },[socket])
+  }, [socket])
 
   return (
     <div id='document' ref={document}>
