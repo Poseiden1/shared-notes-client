@@ -8,6 +8,7 @@ const Rooms = (props) => {
         setNickname={props.setNickname}
         roomId={props.roomId}
         setRoomId={props.setRoomId}
+        setPath={props.setPath}
       ></Roomlist>
     </div>
   )

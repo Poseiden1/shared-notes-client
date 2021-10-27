@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect} from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
@@ -19,9 +19,13 @@ import '../css/Main.css'
 const Container = (props) => {
   const [nickname, setNickname] = useState(Cookies.get('nickname') === undefined ? 'Unknown' : Cookies.get('nickname'))
   const [roomId, setRoomId] = useState('')
+  const [path, setPath] = useState('')
+  useEffect(() => {
+    setPath(window.location.pathname)
+  }, [])
   return (
     <div id='container'>
-      <Navbar></Navbar>
+      <Navbar path={path} setPath={setPath}></Navbar>
       <div id='main' className='main'>
         <Switch>
           <Route exact path='/home'>
@@ -31,7 +35,7 @@ const Container = (props) => {
             <Document nickname={nickname}></Document>
           </Route>
           <Route exact path='/rooms'>
-            <Rooms nickname={nickname} setNickname={setNickname} roomId = {roomId} setRoomId = {setRoomId}></Rooms>
+            <Rooms nickname={nickname} setNickname={setNickname} roomId = {roomId} setRoomId = {setRoomId} setPath = {setPath}></Rooms>
           </Route>
           <Route exact path='/about'>
             <About></About>

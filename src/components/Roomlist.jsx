@@ -112,6 +112,7 @@ const Roomlist = (props) => {
       result.json().then((data) => {
         props.setRoomId(data.redirectUrl.split('/')[2])
         history.push(data.redirectUrl)
+        props.setPath(window.location.pathname)
       })
     })
   }
