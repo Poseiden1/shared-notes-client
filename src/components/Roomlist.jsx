@@ -12,6 +12,7 @@ import createroomIcon from '../img/createroom.svg'
 import joinroomIcon from '../img/joinroom.svg'
 import playIcon from '../img/play.svg'
 import cancelIcon from '../img/cancel.svg'
+import Cookies from 'js-cookie'
 
 const Roomlist = (props) => {
   const history = useHistory()
@@ -50,7 +51,9 @@ const Roomlist = (props) => {
         style={{ backgroundColor: activeRow === el.id ? '#CCC' : '' }}
       >
         <td>{el.name}</td>
-        <td>{el.users} / {el.maxusers}</td>
+        <td>
+          {el.users} / {el.maxusers}
+        </td>
         <td>{el.password}</td>
         <td>{el.owner}</td>
       </tr>
@@ -102,6 +105,7 @@ const Roomlist = (props) => {
       maxusers: users,
       password: password,
     }
+    Cookies.set('nickname', props.nickname)
     fetch('/rooms/create', {
       method: 'POST',
       headers: {
@@ -117,6 +121,7 @@ const Roomlist = (props) => {
     })
   }
   const onJoinRoom = () => {
+    Cookies.set('nickname', props.nickname)
     let data = {
       password: password,
       roomId: activeRow,
@@ -129,7 +134,11 @@ const Roomlist = (props) => {
       body: JSON.stringify(data),
     }).then((result) => {
       result.json().then((data) => {
-        if (data.success) history.push(data.redirectUrl)
+        if (data.success) {
+          history.push(data.redirectUrl)
+          props.setRoomId(data.redirectUrl.split('/')[2])
+          props.setPath(window.location.pathname)
+        }
       })
     })
   }
@@ -179,7 +188,14 @@ const Roomlist = (props) => {
           </thead>
           <tbody ref={roomlistTBody}>
             {tableContent.map(renderRow)}
-            <tr><td colSpan={4} style={{textAlign: 'center', color:'#777', width: 500}}>{getUserCount()} user(s) found in {tableContent.length} room(s)</td></tr>
+            <tr>
+              <td
+                colSpan={4}
+                style={{ textAlign: 'center', color: '#777', width: 500 }}
+              >
+                {getUserCount()} user(s) found in {tableContent.length} room(s)
+              </td>
+            </tr>
           </tbody>
         </table>
         <div

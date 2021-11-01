@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useHistory } from 'react-router'
 import TextEditor from '../components/TextEditor'
 import { io, Socket } from 'socket.io-client'
+import Cookies from 'js-cookie'
 
 const Document = (props) => {
   const history = useHistory()
@@ -12,6 +13,10 @@ const Document = (props) => {
   const [quills, setQuills] = useState([])
   const document = useRef()
   useEffect(() => {
+    if(Cookies.get('nickname') === 'Unknown' || !Cookies.get('nickname')) {
+      history.push('/rooms')
+      return
+    }
     const s = io()
     setSocket(s)
     return () => {

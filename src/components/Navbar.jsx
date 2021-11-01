@@ -3,19 +3,19 @@ import NavbarLink from './NavbarLink'
 import { Link } from 'react-router-dom'
 
 const Navbar = (props) => {
-  const [isDocumentAvaible, setIsDocumentAvaible] = useState(true)
+  const [isDocumentHidden, setIsDocumentHidden] = useState(true)
 
   useEffect(() => {
     let l = props.path.split('/')
 
     if (l.length === 3) {
       if (l[1] === 'rooms' && l[2].length === 8) {
-        setIsDocumentAvaible(false)
+        setIsDocumentHidden(false)
       } else {
-        setIsDocumentAvaible(true)
+        setIsDocumentHidden(true)
       }
     } else {
-      setIsDocumentAvaible(true)
+      setIsDocumentHidden(true)
     }
   }, [props])
   return (
@@ -33,7 +33,7 @@ const Navbar = (props) => {
         <NavbarLink path={props.path} setPath={props.setPath}>
           <Link to='/help'>Help</Link>
         </NavbarLink>
-        <NavbarLink path={props.path} hidden={isDocumentAvaible}>
+        <NavbarLink path={props.path} hidden={isDocumentHidden}>
           <div>Download as PDF</div>
         </NavbarLink>
       </ul>

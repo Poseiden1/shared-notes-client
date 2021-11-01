@@ -21,6 +21,8 @@ export default function TextEditor(props) {
   /** @type {[Quill]} */
   const [quill, setQuill] = useState()
   const [name, setName] = useState()
+  const [typing, setTyping] = useState(false)
+  const [timer, setTimer] = useState(undefined)
   useEffect(() => {
     const n = 'Unknown'
     setName(n)
@@ -49,17 +51,31 @@ export default function TextEditor(props) {
 
   useEffect(() => {
     if (props.socket == null || quill == null) return
+    const timeoutFunction = () => {
+      setTyping(false)
+      let id = quill.container.parentElement.id
+      props.socket.emit('save-document-field', quill.getContents(), id)
+    }
+
     const handler = (delta, oldDelta, source) => {
       if (source !== 'user') return
       let id = quill.container.parentElement.id
       props.socket.emit('send-changes', delta, name, id)
+      // is Typing ... stuff
+      if (!typing) {
+        setTyping(true);
+        setTimer(setTimeout(timeoutFunction, 3000));
+      } else {
+        clearTimeout(timer);
+        setTimer(setTimeout(timeoutFunction, 3000));
+      }
     }
     quill.on('text-change', handler)
 
     return () => {
       quill.off('text-change', handler)
     }
-  }, [name, props.socket, quill])
+  }, [name, props.socket, quill, typing, timer])
 
   useEffect(() => {
     if (props.socket == null || quill == null) return
@@ -87,6 +103,7 @@ export default function TextEditor(props) {
     if (props.socket == null || quill == null) return
 
     const handler = (data, id) => {
+      console.log("DOWNLOADED   " + id)
       if (id === props.id) {
         quill.setContents(data)
         if(id === props.socket.id) {
