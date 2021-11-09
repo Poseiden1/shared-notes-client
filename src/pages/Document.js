@@ -13,7 +13,7 @@ const Document = (props) => {
   const [quills, setQuills] = useState([])
   const document = useRef()
   useEffect(() => {
-    if(Cookies.get('nickname') === 'Unknown' || !Cookies.get('nickname')) {
+    if (Cookies.get('nickname') === 'Unknown' || !Cookies.get('nickname')) {
       history.push('/rooms')
       return
     }
@@ -25,29 +25,58 @@ const Document = (props) => {
   }, [])
   useEffect(() => {
     if (socket === null || socket === undefined) return
-    socket.on('connect', (id) => {
+    const handler = () => {
       socket.emit('userConnect', props.nickname)
-    })
+    }
+    socket.on('connect', handler)
 
-    socket.once('selfJoinedRoom', () => {
-      quills.forEach((q) => {
-        socket.emit('get-document-field', q.id)
-      })
-    })
-    socket.once('room-not-found', () => {
-      history.push('/rooms')
-    })
+    return () => {
+      socket.off('connect', handler)
+    }
   }, [socket, quills])
 
   useEffect(() => {
     if (socket === null || socket === undefined) return
-    socket.on('joinedRoom', (users) => {
+    const handler = () => {
+      quills.forEach((q) => {
+        socket.emit('get-document-field', q.id)
+      })
+    }
+    socket.once('selfJoinedRoom', handler)
+
+    return () => {
+      socket.off('selfJoinedRoom', handler)
+    }
+  }, [socket, quills])
+
+  useEffect(() => {
+    if (socket === null || socket === undefined) return
+    const handler = () => {
+      socket.once('room-not-found', () => {
+        history.push('/rooms')
+      })
+    }
+
+    socket.once('room-not-found', handler)
+    return () => {
+      socket.off('room-not-found', handler)
+    }
+  }, [socket])
+
+  useEffect(() => {
+    if (socket === null || socket === undefined) return
+    const handler = (users) => {
       var newArray = [{ id: 'title' }]
       users.forEach((user) => {
         newArray.push({ id: user.id, nickname: user.nickname })
       })
       setQuills(newArray)
-    })
+    }
+    socket.on('joinedRoom', handler)
+
+    return () => {
+      socket.off('joinedRoom', handler)
+    }
   }, [socket])
 
   return (

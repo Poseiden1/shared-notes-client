@@ -52,7 +52,9 @@ export default function TextEditor(props) {
   useEffect(() => {
     if (props.socket == null || quill == null) return
     const timeoutFunction = () => {
+      if(quill == null) return
       setTyping(false)
+      setTimer(setTimeout(timeoutFunction, 10000));
       let id = quill.container.parentElement.id
       props.socket.emit('save-document-field', quill.getContents(), id)
     }
@@ -66,6 +68,7 @@ export default function TextEditor(props) {
         setTyping(true);
         setTimer(setTimeout(timeoutFunction, 3000));
       } else {
+        
         clearTimeout(timer);
         setTimer(setTimeout(timeoutFunction, 3000));
       }
@@ -73,6 +76,7 @@ export default function TextEditor(props) {
     quill.on('text-change', handler)
 
     return () => {
+      clearTimeout(timer)
       quill.off('text-change', handler)
     }
   }, [name, props.socket, quill, typing, timer])
