@@ -45,7 +45,7 @@ export default function TextEditor(props) {
     props.socket.on('receive-changes-' + props.id, handler)
 
     return () => {
-      props.socket.off('receive-changes' + props.id, handler)
+      props.socket.off('receive-changes-' + props.id, handler)
     }
   }, [props, quill])
 
