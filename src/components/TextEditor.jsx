@@ -3,6 +3,8 @@ import React from 'react'
 import { useEffect, useCallback, useState } from 'react'
 import Quill from 'quill'
 import '../css/TextEditor.css'
+import ImageCompress from 'quill-image-compress'
+Quill.register('modules/imageCompress', ImageCompress)
 
 var toolbarOptions = [
   ['bold', 'italic', 'underline', 'strike'], // toggled buttons
@@ -34,11 +36,10 @@ export default function TextEditor(props) {
     const handler = (delta, name, id) => {
       if (id === props.id) {
         quill.updateContents(delta)
-        if(id === props.socket.id) {
+        if (id === props.socket.id) {
           quill.focus()
-          quill.setSelection(quill.getLength()-1, 1)
+          quill.setSelection(quill.getLength() - 1, 1)
           quill.container.previousSibling.style.display = 'block'
-        
         }
       }
     }
@@ -52,9 +53,9 @@ export default function TextEditor(props) {
   useEffect(() => {
     if (props.socket == null || quill == null) return
     const timeoutFunction = () => {
-      if(quill == null) return
+      if (quill == null) return
       setTyping(false)
-      setTimer(setTimeout(timeoutFunction, 10000));
+      setTimer(setTimeout(timeoutFunction, 10000))
       let id = quill.container.parentElement.id
       props.socket.emit('save-document-field', quill.getContents(), id)
     }
@@ -65,12 +66,11 @@ export default function TextEditor(props) {
       props.socket.emit('send-changes', delta, name, id)
       // is Typing ... stuff
       if (!typing) {
-        setTyping(true);
-        setTimer(setTimeout(timeoutFunction, 3000));
+        setTyping(true)
+        setTimer(setTimeout(timeoutFunction, 3000))
       } else {
-        
-        clearTimeout(timer);
-        setTimer(setTimeout(timeoutFunction, 3000));
+        clearTimeout(timer)
+        setTimer(setTimeout(timeoutFunction, 3000))
       }
     }
     quill.on('text-change', handler)
@@ -107,13 +107,13 @@ export default function TextEditor(props) {
     if (props.socket == null || quill == null) return
 
     const handler = (data, id) => {
-      console.log("DOWNLOADED   " + id)
+      console.log('DOWNLOADED   ' + id)
       if (id === props.id) {
         quill.setContents(data)
-        if(id === props.socket.id) {
+        if (id === props.socket.id) {
           quill.enable()
           quill.focus()
-          quill.setSelection(quill.getLength()-1, 1)
+          quill.setSelection(quill.getLength() - 1, 1)
           quill.container.previousSibling.style.display = 'block'
         }
       }
@@ -123,7 +123,6 @@ export default function TextEditor(props) {
     return () => {
       props.socket.off('load-document-field-' + props.id, handler)
     }
-
   }, [props, quill])
 
   useEffect(() => {
@@ -150,7 +149,17 @@ export default function TextEditor(props) {
     wrapper.append(editor)
     const q = new Quill(editor, {
       theme: 'snow',
-      modules: { toolbar: toolbarOptions },
+      modules: {
+        toolbar: toolbarOptions,
+        imageCompress: {
+          quality: 0.3, // default
+          maxWidth: 400, // default
+          maxHeight: 400, // default
+          imageType: 'image/jpeg', // default
+          debug: true, // default
+          suppressErrorLogging: false, // default
+        },
+      },
     })
     q.container.previousSibling.style.display = 'none'
     setQuill(q)
