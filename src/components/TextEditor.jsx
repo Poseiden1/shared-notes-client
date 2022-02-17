@@ -52,10 +52,12 @@ export default function TextEditor(props) {
 
   useEffect(() => {
     if (props.socket == null || quill == null) return
-    const timeoutFunction = () => {
+    const timeoutFunction = (time) => {
       if (quill == null) return
       setTyping(false)
-      setTimer(setTimeout(timeoutFunction, 10000))
+      setTimer(setTimeout(() => {
+        timeoutFunction(time*2)
+      }, time*2))
       let id = quill.container.parentElement.id
       props.socket.emit('save-document-field', quill.getContents(), id)
     }
@@ -64,13 +66,18 @@ export default function TextEditor(props) {
       if (source !== 'user') return
       let id = quill.container.parentElement.id
       props.socket.emit('send-changes', delta, name, id)
+
       // is Typing ... stuff
       if (!typing) {
         setTyping(true)
-        setTimer(setTimeout(timeoutFunction, 3000))
+        setTimer(setTimeout(() => {
+          timeoutFunction(10000)
+        }, 10000))
       } else {
         clearTimeout(timer)
-        setTimer(setTimeout(timeoutFunction, 3000))
+        setTimer(setTimeout(() => {
+          timeoutFunction(10000)
+        }, 10000))
       }
     }
     quill.on('text-change', handler)
@@ -83,6 +90,7 @@ export default function TextEditor(props) {
 
   useEffect(() => {
     if (props.socket == null || quill == null) return
+
     const handler = (range, oldRange, source) => {
       if (range) {
         // quill.container.previousSibling.style.display = 'block'
